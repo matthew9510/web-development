@@ -1,0 +1,181 @@
+
+<!-- saved from url=(0063)https://courses.washington.edu/css342/zander/css332/passby.html -->
+<html class="gr__courses_washington_edu"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+  
+  <meta name="Author" content="Carol Zander">
+  <title> Function pass by value vs. pass by reference</title>
+</head>
+<body data-gr-c-s-loaded="true">
+
+<u> <b> <h2>Function pass by value vs. pass by reference </h2> </b> </u>
+
+I will call what you are passing in a to a function the
+<i><u>actual parameters</u></i>,
+and where you receive them, the parameters in the function, 
+the <i><u>formal parameters.</u></i> They are also called
+actual and formal <i><u>arguments</u></i>.
+<br><br>
+
+When passing parameters, what it is called and what happens
+can be confusing. It is less essential that you call it the
+"correct" thing than you know exactly what is happening.
+It is critical to have a good mental model, a valid memory
+picture of the process.
+<br><br>
+
+Recall that when you call a function, a chunk of memory called an 
+<i><u>activation record </u></i> is allocated. Critical to the
+discussion here is that this memory holds the formal parameter
+values and function local variables.
+<br><br>
+
+By definition, <i><u>pass by value</u></i> means you are making 
+a copy in memory of the actual parameter's value that is passed in,
+a copy of the contents of the actual parameter.
+Use pass by value when when you are only "using" the parameter
+for some computation, not changing it for the client program.
+<br><br>
+
+In <i><u>pass by reference</u></i> (also called pass by address),
+a copy of the address of the actual parameter is stored. Use
+pass by reference when you are changing the parameter passed
+in by the client program.
+<br><br>
+
+Consider a swapping function to demonstrate pass by value vs.
+pass by reference. This function, which swaps ints, cannot
+be done in Java.
+<br><br>
+
+<code>
+<pre>   main() {
+      int i = 10, j = 20;
+      swapThemByVal(i, j);
+      cout &lt;&lt; i &lt;&lt; "  " &lt;&lt; j &lt;&lt; endl;     // displays 10  20
+      swapThemByRef(i, j);
+      cout &lt;&lt; i &lt;&lt; "  " &lt;&lt; j &lt;&lt; endl;     // displays 20  10
+      ...
+   }
+
+   void swapThemByVal(int num1, int num2) {
+      int temp = num1;
+      num1 = num2;
+      num2 = temp;
+   }
+
+   void swapThemByRef(int&amp; num1, int&amp; num2) {
+      int temp = num1;
+      num1 = num2;
+      num2 = temp;
+   }
+</pre>
+</code>
+
+First, we show the memory picture for swapThemByVal. The
+activation record holds the memory for the two parameters,
+num1 and num2, and the local variable, temp. A copy of
+the values from main, in the contents of i and j, are copied.
+All the manipulation is done in the activation record.
+
+<code>
+<pre>                       +-------------+                +-------------+  
+        swapThemByVal: |+--+         | swapThemByVal: |+--+         |  
+        (at start)     ||..| temp    | (after         ||10| temp    |  
+main:                  |+--+         |  assignments)  |+--+         |  
+  +----+               |+--+         |                |+--+         |  
+i | 10 |               ||10| num1    |                ||20| num1    |  
+  +----+               |+--+         |                |+--+         |  
+  +----+               |+--+         |                |+--+         |  
+j | 20 |               ||20| num2    |                ||10| num2    |  
+  +----+               |+--+         |                |+--+         |  
+                       +-------------+                +-------------+  
+</pre>
+</code>
+
+The contents of memory of &nbsp; i &nbsp; and &nbsp; j &nbsp; don't change.
+The contents of memory in the function's activation record changes,
+but when the function terminates, the memory is released and
+the changes are lost.
+<br><br>
+
+Contrast this with passing by reference. The addresses of 
+&nbsp; i &nbsp; and &nbsp; j &nbsp; 
+are passed (noted by the arrows) by reference.
+The compiler knows they are references so when the parameters
+are referred to in the function, the compiler dereferences
+num1 and num2 automatically so
+&nbsp; i &nbsp; and &nbsp; j &nbsp; 
+of main's memory are changed.
+
+<code>
+<pre>                       +-------------+
+        swapThemByRef: |+--+         |
+                       ||..| temp    |
+main:                  |+--+         |
+  +----+               |+--+         |
+i | 10 | &lt;-------------||--| num1    |
+  +----+               |+--+         |
+  +----+               |+--+         |
+j | 20 | &lt;-------------||--| num2    |
+  +----+               |+--+         |
+                       +-------------+
+</pre>
+</code>
+
+After the assignments:
+
+<code>
+<pre>                       +-------------+
+        swapThemByRef: |+--+         |
+                       ||10| temp    |
+main:                  |+--+         |
+  +----+               |+--+         |
+i | 20 | &lt;-------------||--| num1    |
+  +----+               |+--+         |
+  +----+               |+--+         |
+j | 10 | &lt;-------------||--| num2    |
+  +----+               |+--+         |
+                       +-------------+
+</pre>
+</code>
+
+This is the essence of pass by value vs. pass by reference.
+It doesn't matter if the parameters are primitive types, arrays, or
+objects, either a copy is made or an address is stored.
+As noted elsewhere, when objects are copied, the copy constructor is
+called to do the copying.
+<br><br>
+
+<a name="fakepassbyval"> </a>
+Typically if you aren't going to change a variable, you use
+pass by value. But if you are passing something in that uses a
+lot of memory, i.e., passing an object or 
+<a href="https://courses.washington.edu/css342/zander/css332/arrayparam.html"> passing an array</a>,  
+even if you aren't changing it,
+you use what I like to call <i><u>fake pass by value</u></i>.
+<br><br>
+
+For efficiency, you pass by reference so only the address is passed,
+but you put a <i>const</i> in front of it. This casts it to a
+constant for use in the function. Note that if this function
+passes to some other function, it is now constant object or array.
+For example:
+
+<code>
+<pre>main() {
+   SomeBigClass x(100);
+   // initialize and do whatever with x
+   doSomething(x);
+   ...
+}
+
+void doSomething(const SomeBigClass&amp; x) {
+   ...
+}
+</pre>
+</code>
+
+
+
+
+</body></html>

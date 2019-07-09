@@ -431,10 +431,10 @@ var myObj = {
 };
 myObj.myFunc(); // = "Hello world!"
 
-// Other way to do this
+// Another way of doing the same thing as above
 var myOtherObject = new Object();
-myOtherObject.myFunc = function(){ return "Hello world!";}; // Another way to assign an object attribute-> myOtherObject[myFunc] = function(){ return "Hello world!";};
-myOtherObject.myFunc(); // Another way to invoke -> myOtherObject[myFunc]();
+myOtherObject.myFunc = function(){ return "Hello world!";}; 
+myOtherObject.myFunc();
 
 
 // When functions attached to an object are called, they can access the object
@@ -727,3 +727,4 @@ if (Object.create === undefined){ // don't overwrite it if it exists
         return new Constructor();
     };
 }
+

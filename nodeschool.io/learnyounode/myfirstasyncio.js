@@ -1,3 +1,7 @@
 var fs = require('fs');
 
-fs.readFile
+fs.readFile('file/path', function(err, contents){
+    
+})
+
+  

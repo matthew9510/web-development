@@ -4,6 +4,7 @@
   "description": "Code that goes along with nodeschool.io",
   "main": "index.js",
   "dependencies": {
+    "bl": "^3.0.0",
     "javascripting": "^2.6.1"
   },
   "devDependencies": {},

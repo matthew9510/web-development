@@ -384,7 +384,8 @@ i; // = 5 - not undefined as you'd expect in a block-scoped language
 
 // This has led to a common pattern of "immediately-executing anonymous
 // functions", which prevent temporary variables from leaking into the global
-// scope.
+// scope. The anonymous function with lexical scope enclosed within the Grouping Operator (). 
+// This prevents accessing variables within the IIFE idiom as well as polluting the global scope.
 (function(){
     var temporary = 5;
     // We can access the global scope by assigning to the "global object", which
@@ -401,9 +402,30 @@ catch(err) {
 }
 permanent; // = 10
 
+// we can still return a value with immediately invoked functions 
+var result = (function() { var temp = Math.PI})
+console.log(result) // = 3.14 
+
+// Lexical scoping
+function init() {
+  var name = 'Mozilla'; // name is a local variable created by init
+  function displayName() { // displayName() is the inner function, a closure
+    console.log(name); // use variable declared in the parent function
+  }
+  displayName();
+}
+init();
+// init() creates a local variable called name and a function called displayName(). 
+// The displayName() function is an inner function that is defined inside init() 
+// and is only available within the body of the init() function. 
+// Note that the displayName() function has no local variables of its own. 
+// However, since inner functions have access to the variables of outer functions, 
+// displayName() can access the variable name declared in the parent function, init().
+//If displayName() were to have its own name local variable, it would use this.name instead.
+
 // One of JavaScript's most powerful features is closures. If a function is
 // defined inside another function, the inner function has access to all the
-// outer function's variables, even after the outer function exits.
+// outer function's variables, even after the outer function exits. 
 function sayHelloInFiveSeconds(name){
     var prompt = "Hello, " + name + "!";
     // Inner functions are put in the local scope by default, as if they were
@@ -419,6 +441,17 @@ function sayHelloInFiveSeconds(name){
 }
 sayHelloInFiveSeconds("Adam"); // will open a popup with "Hello, Adam!" in 5s
 
+// One other thing you can do with closures is return the inner function by invoking
+// the outer function before being executed.
+function init() {
+    var name = 'Mozilla'; // name is a local variable created by init
+    function displayName() { // displayName() is the inner function, a closure
+      console.log(name); // use variable declared in the parent function
+    }
+    return displayName;
+  }
+var myFunc = init();
+myFunc();
 
 ///////////////////////////////////
 // 5. More about Objects; Constructors and Prototypes
@@ -728,3 +761,131 @@ if (Object.create === undefined){ // don't overwrite it if it exists
     };
 }
 
+// isPrototypeOf() 
+// this method checks if an object exists in another object's prototype chain.
+function object1() {}
+function object2() {}
+
+object1.prototype = Object.create(object2.prototype);
+
+const object3 = new object1();
+
+console.log(object1.prototype.isPrototypeOf(object3)); // = true
+
+console.log(object2.prototype.isPrototypeOf(object3)); // = true
+
+
+// isPrototypeOf() differs from the instanceof operator. 
+// In the expression "object instanceof AFunction", the object prototype chain is checked against 
+// AFunction.prototype, not against AFunction (the instance) itself.
+
+// The instanceof operator tests whether the prototype property of a constructor (not the Constructor Function itsef) appears 
+// anywhere in the prototype chain of an object.
+function Car(make, model, year) {
+    this.make = make;
+    this.model = model;
+    this.year = year;
+  }
+  var auto = new Car('Honda', 'Accord', 1998);
+  
+  console.log(auto instanceof Car); // true
+  
+  console.log(auto instanceof Object); // = true
+  
+///////////////////////////////////////
+// Different types of 'this' contexts:
+// 'this.' will mean reference different things based on how the function wrapping the 'this.' reference is called 
+// The value of this is determined by how a function is called (runtime binding). 
+function foo(){
+    console.log("Hello World!");
+    console.log(this);
+}
+
+foo(); // Method #1, refers to window / global object 
+
+var obj = {
+    name:"Matt"
+}
+
+obj.method = function(){
+    console.log(this.name);
+}
+
+obj.method(); // Method #2, refers to the object you are calling the method on, calling in context of the object 
+
+new foo(); // Method #3, refers to the newly created object; creates a new object on the fly and assigns it to the this reference, points to newly created object
+
+// Method #4:
+// We can also specify a context for a function to execute in when we invoke it using `call` or `apply`. 
+// Specifying context means to essentially force the value of 'this' to refer to the object being passed in to the call(), apply(), or bind() function method
+// Note: .call() is a function method, so you invoke it on a function reference
+var someFunction = function(s1){
+    return this.name + s1;
+};
+
+someFunction.call(obj, " really enjoys programming!"); // = "Matt really enjoys programming!"
+someFunction(" really enjoys programming!"); // = "undefined really enjoys programming!" ; undefined is printed because the context of 'this' refers to the window(browser)/global(nodejs) object, and that object doesn't hve the property '.name'
+
+// The `apply` function is nearly identical, but takes an array for an argument list.
+anotherFunc.apply(obj, [" really enjoys programming!"]); // = "Matt really enjoys programming!"
+
+var obj2 = {name:"Peter"}
+var boundedFunction = someFunction.bind(obj2);
+boundedFunction(" also really enjoys programming!") // = "Peter also really enjoys programming!"
+
+// Method #5: 
+// In arrow functions, this retains the value of the enclosing lexical context's this. 
+// In global code, it will be set to the global object:
+var globalObject = this;
+var foo = (() => this);
+console.log(foo() === globalObject); // true
+
+// if this arg is passed to call, bind, or apply on invocation of an arrow function it will be ignored. You can still prepend arguments to the call, but the first argument (thisArg) should be set to null.
+
+// Call as a method of an object
+var obj = {func: foo};
+console.log(obj.func() === globalObject); // true
+
+// Attempt to set this using call
+console.log(foo.call(obj) === globalObject); // true
+
+// Attempt to set this using bind
+foo = foo.bind(obj);
+console.log(foo() === globalObject); // true
+
+// No matter what, foo's this is set to what it was when it was created (in the example above, the global object). 
+// The same applies to arrow functions created inside other functions: their this remains that of the enclosing lexical context.
+
+// Create obj with a method bar that returns a function that
+// returns its this. The returned function is created as 
+// an arrow function, so its this is permanently bound to the
+// this of its enclosing function. The value of bar can be set
+// in the call, which in turn sets the value of the 
+// returned function.
+var obj = {
+    bar: function() {
+      var x = (() => this); // or calls another function of a different class and ueses the arrow function as a callback to bind the instance of the object
+      return x;
+    },
+    method: () =>{this}
+  };
+  
+  // Call bar as a method of obj, setting its this to obj
+  // Assign a reference to the returned function to fn
+  var fn = obj.bar();
+  
+  // Call fn without setting this, would normally default
+  // to the global object or undefined in strict mode
+  console.log(fn() === obj); // true
+  
+  // Arrow functions as methods behave differently:
+  console.log("MEHEHS", obj.method())
+  // But caution if you reference the method of obj without calling it
+  var fn2 = obj.bar;
+  // Calling the arrow function's this from inside the bar method()
+  // will now return window, because it follows the this from fn2.
+  console.log(fn2()() == global); // true
+
+  // In the above, the function (call it anonymous function A) assigned 
+  // to obj.bar returns another function (call it anonymous function B) 
+  // that is created as an arrow function. As a result, function B's `this` is permanently set to the this of obj.bar (function A) when called. When the returned function (function B) is called, its this will always be what it was set to initially. In the above code example, function B's this is set to function A's this which is obj, so it remains set to obj even when called in a manner that would normally set its this to undefined or the global object (or any other method as in the previous example in the global execution context).

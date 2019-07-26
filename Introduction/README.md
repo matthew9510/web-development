@@ -10,6 +10,9 @@
   
 - [Currying functions](https://medium.com/javascript-scene/curry-and-function-composition-2c208d774983)
 
+- [this explained](https://www.youtube.com/watch?v=fBpPfPjxOhc&list=PLqq-6Pq4lTTaflXUL0v3TSm86nodn0c_u)
+- [this documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)
+
 - [call(), apply() and bind() explained](https://medium.com/@owenyangg/javascript-call-apply-and-bind-explained-to-a-total-noob-63f146684564)
 
 - [bind and this](https://www.youtube.com/watch?v=GhbhD1HR5vk&list=PL0zVEGEvSaeHBZFy6Q8731rcwk0Gtuxub)

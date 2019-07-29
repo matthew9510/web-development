@@ -1,4 +1,0 @@
-#! /bin/sh
-# Type "chmod +x ./update; ./update" to run this file
-git remote add upstream https://github.com/SoftStackFactory/ssf-es6.git
-git pull upstream master

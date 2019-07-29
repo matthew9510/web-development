@@ -1,0 +1,17 @@
+/**
+// ==========================================================================
+//  MAIN CSS FILE [ HEADER ]
+// ==========================================================================
+**/
+
+
+/* CSS FILE COMMENTS [ INLINE ] */
+/*@import url('https://fonts.googleapis.com/css?family=VT323&display=swap');
+*/
+body{
+    font-family: 'VT323', monospace;
+}
+
+h1.name{
+    color: blue;
+}

@@ -1,0 +1,37 @@
+/**
+// ==========================================================================
+//  Layout 4 CSS FILE
+// ==========================================================================
+**/
+.wrapper{
+    --max-height: 100%;
+}
+
+
+div.main{
+    height: var(--max-height);
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start; 
+}
+
+div.box{
+    height:20%;
+    width: 13%;
+}
+
+div.box1{
+    background-color: grey;
+}
+
+div.box2{ 
+    background-color: black;
+    color: white;
+    position: relative;
+    left:-6%;
+    top:12%;
+}
+
+p{
+    margin:0;
+}

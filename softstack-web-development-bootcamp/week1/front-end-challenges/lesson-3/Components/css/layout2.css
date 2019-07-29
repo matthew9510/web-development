@@ -1,0 +1,28 @@
+/**
+// ==========================================================================
+//  Layout 2 CSS FILE
+// ==========================================================================
+**/
+
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 100%;
+}
+
+div.box {
+  width: 130px;
+  height: 130px;
+  background-color: black;
+  color: white;
+}
+
+div.box2{
+    align-self: center;
+}
+
+div.box3{
+    align-self: flex-end;
+}

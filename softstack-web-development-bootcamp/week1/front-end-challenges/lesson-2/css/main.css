@@ -1,0 +1,42 @@
+/**
+// ==========================================================================
+//  MAIN CSS FILE [ HEADER ]
+// ==========================================================================
+**/
+
+
+/* CSS FILE COMMENTS [ INLINE ] */
+*{
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'VT323', monospace;
+}
+
+div.wrapper{
+    background-color: #FDFEFE;
+    margin: 20px;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+section.main{
+    background-color: #FBFEF2;
+    padding: 10px;
+    flex: 1 1 75%;
+/*    min-width: 0px;*/
+}
+
+aside.sidebar{
+    background-color: #ECF0F6;
+    border: 2px solid red;
+    padding: 15px;
+    flex: 1 1 25%;
+/*    min-width: 0px;*/
+}
+img.sidebar{
+    width:100%;
+}

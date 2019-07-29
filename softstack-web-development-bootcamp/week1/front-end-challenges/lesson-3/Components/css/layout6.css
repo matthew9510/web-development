@@ -1,0 +1,35 @@
+/**
+// ==========================================================================
+//  Layout 6 CSS FILE
+// ==========================================================================
+**/
+
+.wrapper{
+    height: 100vh;
+}
+
+div.main{
+    height: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between; 
+}
+
+div.box{
+    flex: 0 1 13%;
+    height: 20%; 
+    background-color: black;
+    color: white;
+}
+
+div.box2{ 
+    align-self: center;
+}
+
+div.box3{ 
+    align-self: flex-end;
+} 
+
+p{
+    margin:0;
+}

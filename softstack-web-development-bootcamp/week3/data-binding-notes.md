@@ -1,0 +1,2 @@
+[Understanding the differences between attributes and properties](https://www.youtube.com/watch?v=Ut-ATm23_Pg)
+[Understanding the differences between attributes and properties article](https://medium.com/@vaqifagayev/html-attributes-vs-dom-properties-and-angular-2-data-binding-9e6e5a09c69d)

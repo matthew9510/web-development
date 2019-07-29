@@ -1,0 +1,21 @@
+[submodule "css/what-the-flexbox"]
+	path = css/what-the-flexbox
+	url = https://github.com/wesbos/What-The-Flexbox.git
+[submodule "angular/codelab"]
+	path = angular/codelab
+	url = https://github.com/codelab-fun/codelab.git
+[submodule "softstack-web-development-bootcamp/week1/fix-errors"]
+	path = softstack-web-development-bootcamp/week1/fix-errors
+	url = https://github.com/SoftStackFactory/fix-errors.git
+[submodule "softstack-web-development-bootcamp/week1/front-end-challenges"]
+	path = softstack-web-development-bootcamp/week1/front-end-challenges
+	url = https://github.com/SoftStackFactory/front-end-challenges.git
+[submodule "softstack-web-development-bootcamp/week2/javascript-classes-matthew9510"]
+	path = softstack-web-development-bootcamp/week2/javascript-classes-matthew9510
+	url = https://github.com/2019-mean-4/javascript-classes-matthew9510.git
+[submodule "softstack-web-development-bootcamp/week2/javascript-es6-matthew9510"]
+	path = softstack-web-development-bootcamp/week2/javascript-es6-matthew9510
+	url = https://github.com/2019-mean-4/javascript-es6-matthew9510.git
+[submodule "softstack-web-development-bootcamp/week2/typescript-imports-matthew9510"]
+	path = softstack-web-development-bootcamp/week2/typescript-imports-matthew9510
+	url = https://github.com/2019-mean-4/typescript-imports-matthew9510.git

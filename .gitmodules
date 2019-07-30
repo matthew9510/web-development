@@ -1,9 +1,6 @@
 [submodule "css/what-the-flexbox"]
 	path = css/what-the-flexbox
 	url = https://github.com/wesbos/What-The-Flexbox.git
-[submodule "angular/codelab"]
-	path = angular/codelab
-	url = https://github.com/codelab-fun/codelab.git
 [submodule "softstack-web-development-bootcamp/week1/fix-errors"]
 	path = softstack-web-development-bootcamp/week1/fix-errors
 	url = https://github.com/SoftStackFactory/fix-errors.git

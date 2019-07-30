@@ -19,3 +19,6 @@
 [submodule "softstack-web-development-bootcamp/week2/typescript-imports-matthew9510"]
 	path = softstack-web-development-bootcamp/week2/typescript-imports-matthew9510
 	url = https://github.com/2019-mean-4/typescript-imports-matthew9510.git
+[submodule "angular/angular-presentation"]
+	path = angular/angular-presentation
+	url = https://github.com/nycJSorg/angular-presentation.git

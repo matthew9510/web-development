@@ -1,0 +1,31 @@
+div.main{
+    width: auto;
+    height: 100%; /* need to set height so children containers know what to base their height off of */
+}
+
+div.flex-container-top{
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+h1{
+    flex: 1 1 100%;
+    text-align:center;
+}
+
+div.flex-container-bottom{
+    height:90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+img{
+    flex: 1 1 100%; /* note width == 100% */
+    align-self: center;
+    max-width:100%;
+    max-height:100%;
+    height:auto;     
+}

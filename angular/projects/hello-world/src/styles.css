@@ -1,1 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
+*{
+    box-sizing: border-box;
+}
+
+body, html{
+    margin: 0;
+    padding: 0;
+    height:100vh; /* need to set height so children containers know what to base their height off of */
+}

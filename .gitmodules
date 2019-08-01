@@ -19,6 +19,3 @@
 [submodule "angular/angular-presentation"]
 	path = angular/angular-presentation
 	url = https://github.com/nycJSorg/angular-presentation.git
-[submodule "softstack-web-development-bootcamp/week4/angular-heroes-errors"]
-	path = softstack-web-development-bootcamp/week4/angular-heroes-errors
-	url = https://github.com/SoftStackFactory/angular-heroes-errors

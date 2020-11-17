@@ -17,6 +17,8 @@
 
 - [bind and this](https://www.youtube.com/watch?v=GhbhD1HR5vk&list=PL0zVEGEvSaeHBZFy6Q8731rcwk0Gtuxub)
 
+- [Closures and objects being exported, (this reference)](https://stackoverflow.com/questions/10711064/javascript-object-literal-reference-in-own-keys-function-instead-of-this)
+
 - [Arrow Functions](https://www.youtube.com/watch?v=mrYMzpbFz18)
 
 - [Arrow Function Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
